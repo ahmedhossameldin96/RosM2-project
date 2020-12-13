@@ -56,6 +56,21 @@ This unique file contains some C++ fixed processes and building commands. This f
 
 # Tasks Implementation
 ## Task 1
-The aim of task 1 is to move the robot around the map using a simple /cmd_vel topic and print the range of the robot movement:
+The aim of task 1 is to move the robot around the map using a simple /cmd_vel topic and print the range of the robot movement.
+### To move the robot, we have to follow some steps:
 
+ 1. We have to choose a specific topic and this will be by using “ rostopic list “ and filter it by using command “ | grep “ by the following command:
+![1](https://user-images.githubusercontent.com/69988399/102021943-a9505380-3d94-11eb-8d66-b465ad72a568.png)
+And the results will be:
+![2](https://user-images.githubusercontent.com/69988399/102021969-cb49d600-3d94-11eb-83d7-f67cdaf1c800.png)
+ 2. Choose one of the topics as example “ /cmd_vel “ and get the info of this this topic by using the following command:
+![3](https://user-images.githubusercontent.com/69988399/102022074-680c7380-3d95-11eb-96a7-c3b94910d0db.png)
+And the results will be:
+![4](https://user-images.githubusercontent.com/69988399/102022070-6642b000-3d95-11eb-88a4-5c0da84b7466.png)
+As we see (Type:) is showing the message type that we need it to use the topic publishers and subscribers.
+3. The next step is to know the type and the size of Twist message by using the following command:
+![5](https://user-images.githubusercontent.com/69988399/102022072-6773dd00-3d95-11eb-851c-cbb3c87de265.png)
+And the results will be:
+![6](https://user-images.githubusercontent.com/69988399/102022073-6773dd00-3d95-11eb-9cd4-6ce046ea4c3f.png)
+As we see, there are linear and angular movement and we will use it to move the robot.
 

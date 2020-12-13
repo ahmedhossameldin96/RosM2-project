@@ -45,10 +45,10 @@ Configuration: The map’s parameters and also the parameters of the sensor used
  6. CMakeLists.txt:
 This unique file contains some C++ fixed processes and building commands. This file is necessary for building a package.
 
--	Nodes: A node is a built-in ROS function (python, C++) that provides/gets information from ROS topics. ROS nodes can subscribe or publish to a topic for the purpose of sharing important information such as metric values etc.
--	Topics: A topic is the most important component in the package. It can transmit data between nodes (e.g. one node provides values to the topic, and another node prints the topic’s values) and can provide data throughout ROS built-in sensors, functions etc.
--	Messages: A message is a data structure provided by a ROS node using a specific topic. These values either trigger the specific node or trigger some other nodes that are connected to this topic.
-- Services: A service is an alternative way of transmitting node data. When applying this process, the system gives priority to the service to be executed while pausing the other operations. 
+ • Nodes: A node is a built-in ROS function (python, C++) that provides/gets information from ROS topics. ROS nodes can subscribe or publish to a topic for the purpose of sharing important information such as metric values etc.
+ •	Topics: A topic is the most important component in the package. It can transmit data between nodes (e.g. one node provides values to the topic, and another node prints the topic’s values) and can provide data throughout ROS built-in sensors, functions etc.
+ •	Messages: A message is a data structure provided by a ROS node using a specific topic. These values either trigger the specific node or trigger some other nodes that are connected to this topic.
+ • Services: A service is an alternative way of transmitting node data. When applying this process, the system gives priority to the service to be executed while pausing the other operations. 
 
 ![2](https://user-images.githubusercontent.com/69988399/102020969-a00fb880-3d8d-11eb-9624-6dcfb01ecfcb.png)
 
@@ -103,9 +103,13 @@ As we see, there are linear and angular movement and we will use it to move the 
 ![8](https://user-images.githubusercontent.com/69988399/102023657-2fbd6300-3d9e-11eb-9f24-be5b64e87ef4.JPG)
 
 5. Now we are ready to write our code by using the above information. We will write two python codes, one of a topic publisher that gives the order to move the robot and the other code of a subscriber that get the location of the robot and one launch file. 
+
 •	 At ‘task_1_publish.py’ file, we will create a node and publisher then put the rate and the message values of the movement speed, at the end create a counter variable that makes the robot stop after 30 seconds.
+
 •	 At ‘task_1_subscribe.py’ file, we will create a node and subscriber that get the location information from the topic and print it back by callback function but only the actual coordinates that are changing.
+
 •	 At ‘task_1_move.launch’ file, we will launch the two python files together.
+
 6.	Before launching, we have to compile the packages and execute the bash file that sets the newly generated messages created through the catkin_make by the following commands:
 ```
 roscd; cd ..

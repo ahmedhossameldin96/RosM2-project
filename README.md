@@ -117,6 +117,6 @@ source devel/setup.bash
 roslaunch project_robotics_1 task_1_move.launch
 ```
 We will see the robot moving according to the values of the msg (linear.x value and
-angular.z value) these values is the linear and angular speed of the mobile robot and the location of the robot is being printed every one second.
+angular.z value) these values are the linear and angular speed of the mobile robot and the location of the robot is being printed every one second.
 
 

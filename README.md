@@ -1,4 +1,4 @@
-![Capture1](https://user-images.githubusercontent.com/69988399/102021218-49a37980-3d8f-11eb-81e9-2cbe2813c0b0.JPG)
+![Capture](https://user-images.githubusercontent.com/69988399/102021461-00ecc000-3d91-11eb-8510-ac2bcc66a835.JPG)
 
 <h1 align="center"> Robotics Project
 <h3 align="center"> Supervisors:

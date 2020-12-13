@@ -60,6 +60,7 @@ The aim of task 1 is to move the robot around the map using a simple /cmd_vel to
 ### To move the robot, we have to follow some steps:
 
  1. We have to choose a specific topic and this will be by using “ rostopic list “ and filter it by using command “ | grep “ by the following command:
+ 
 ![1](https://user-images.githubusercontent.com/69988399/102021943-a9505380-3d94-11eb-8d66-b465ad72a568.png)
 
 And the results will be:

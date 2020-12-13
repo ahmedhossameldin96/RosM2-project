@@ -69,7 +69,7 @@ rospack profile
 
 ## Task 1
 The aim of task 1 is to move the robot around the map using a simple /cmd_vel topic and print the range of the robot movement.
-### To move the robot, we have to follow some steps:
+### To move the robot and its location, we have to follow some steps:
 
  1. We have to choose a specific topic and this will be by using “ rostopic list “ and filter it by using command “ | grep “ by the following command:
 ```

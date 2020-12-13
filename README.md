@@ -55,6 +55,18 @@ This unique file contains some C++ fixed processes and building commands. This f
 
 
 # Tasks Implementation
+
+
+Before starting any task, we have to create a package first and put all the tasks inside it and that will be by the following commands:
+```
+cd ~/catkin_ws/src
+catkin_create_pkg project_robotics_1 rospy nav_msgs geometry_msgs
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
+rospack profile
+```
+
 ## Task 1
 The aim of task 1 is to move the robot around the map using a simple /cmd_vel topic and print the range of the robot movement.
 ### To move the robot, we have to follow some steps:
@@ -105,6 +117,6 @@ source devel/setup.bash
 roslaunch project_robotics_1 task_1_move.launch
 ```
 We will see the robot moving according to the values of the msg (linear.x value and
-angular.z value) these values is the linear and angular speed of the mobile robot.
+angular.z value) these values is the linear and angular speed of the mobile robot and the location of the robot is being printed every one second.
 
 

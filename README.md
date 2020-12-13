@@ -60,29 +60,44 @@ The aim of task 1 is to move the robot around the map using a simple /cmd_vel to
 ### To move the robot, we have to follow some steps:
 
  1. We have to choose a specific topic and this will be by using “ rostopic list “ and filter it by using command “ | grep “ by the following command:
- 
-![1](https://user-images.githubusercontent.com/69988399/102021943-a9505380-3d94-11eb-8d66-b465ad72a568.png)
-
+```
+rostopic list | grep /cmd_vel
+```
 And the results will be:
-
 ![2](https://user-images.githubusercontent.com/69988399/102021969-cb49d600-3d94-11eb-83d7-f67cdaf1c800.png)
-
  2. Choose one of the topics as example “ /cmd_vel “ and get the info of this this topic by using the following command:
- 
-![3](https://user-images.githubusercontent.com/69988399/102022074-680c7380-3d95-11eb-96a7-c3b94910d0db.png)
-
+```
+rostopic info /cmd_vel
+```
 And the results will be:
-
 ![4](https://user-images.githubusercontent.com/69988399/102022070-6642b000-3d95-11eb-88a4-5c0da84b7466.png)
-
 As we see (Type:) is showing the message type that we need it to use the topic publishers and subscribers.
 3. The next step is to know the type and the size of Twist message by using the following command:
-
-![5](https://user-images.githubusercontent.com/69988399/102022072-6773dd00-3d95-11eb-851c-cbb3c87de265.png)
-
+```
+rosmsg show geometry_msgs/twist
+```
 And the results will be:
-
 ![6](https://user-images.githubusercontent.com/69988399/102022073-6773dd00-3d95-11eb-9cd4-6ce046ea4c3f.png)
-
 As we see, there are linear and angular movement and we will use it to move the robot.
+5.	We will do the same with the topic “/ odom” as we did with the topic “/cmd_vel”  to get the message type and information as the following figure:
+
+![8](https://user-images.githubusercontent.com/69988399/102023657-2fbd6300-3d9e-11eb-9f24-be5b64e87ef4.JPG)
+
+5. Now we are ready to write our code by using the above information. We will write two python codes, one of a topic publisher that gives the order to move the robot and the other code of a subscriber that get the location of the robot and one launch file. 
+•	 At ‘task_1_publish.py’ file, we will create a node and publisher then put the rate and the message values of the movement speed, at the end create a counter variable that makes the robot stop after 30 seconds.
+•	 At ‘task_1_subscribe.py’ file, we will create a node and subscriber that get the location information from the topic and print it back by callback function but only the actual coordinates that are changing.
+•	 At ‘task_1_move.launch’ file, we will launch the two python files together.
+6.	Before launching, we have to compile the packages and execute the bash file that sets the newly generated messages created through the catkin_make by the following commands:
+```
+roscd; cd ..
+catkin_make
+source devel/setup.bash
+```
+7.	The final step to move the robot is to launch the launch-file using the package name and the launch-file name by the following command: 
+```
+roslaunch project_robotics_1 task_1_move.launch
+```
+We will see the robot moving according to the values of the msg (linear.x value and
+angular.z value) these values is the linear and angular speed of the mobile robot.
+
 

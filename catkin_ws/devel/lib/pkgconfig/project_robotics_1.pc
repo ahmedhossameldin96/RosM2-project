@@ -1,0 +1,8 @@
+prefix=/home/user/catkin_ws/devel
+
+Name: project_robotics_1
+Description: Description of project_robotics_1
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

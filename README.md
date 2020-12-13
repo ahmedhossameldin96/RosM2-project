@@ -1,4 +1,5 @@
-![Capture](https://user-images.githubusercontent.com/69988399/102019649-be71b600-3d85-11eb-8260-dca1e8bccf5e.JPG)
+![Capture1](https://user-images.githubusercontent.com/69988399/102021218-49a37980-3d8f-11eb-81e9-2cbe2813c0b0.JPG)
+
 # Robotics Project
 ### Supervisors:
 Raphael DUVERNE, Daniel BRAUN & Ralph SEULIN

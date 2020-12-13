@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Run the map server -->
+  <arg name="map_file" default="$(find project_robotics_1)/maps/project_1_map_first.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!--- Run AMCL -->
+  <include file="$(find project_robotics_1)/launch/amcl_file.launch" />
+
+  <!--- Run Move Base -->
+  <include file="$(find project_robotics_1)/launch/task_4_waypoints_2.launch" />
+
+  <node pkg="project_robotics_1" type="task_4_send_goal.py" name="move_base_action_client" output="screen" />
+ 
+
+
+
+</launch>

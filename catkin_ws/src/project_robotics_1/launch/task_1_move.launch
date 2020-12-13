@@ -1,0 +1,7 @@
+<launch>
+    <!-- My Package launch file -->
+    <node pkg="project_robotics_1" type="task_1_publish.py" name="topict1"  output="screen">
+    </node>
+    <node pkg="project_robotics_1" type="task_1_subscribe.py" name="subscriber1"  output="screen">
+    </node>
+</launch>

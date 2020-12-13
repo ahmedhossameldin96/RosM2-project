@@ -64,20 +64,27 @@ The aim of task 1 is to move the robot around the map using a simple /cmd_vel to
 rostopic list | grep /cmd_vel
 ```
 And the results will be:
+
 ![2](https://user-images.githubusercontent.com/69988399/102021969-cb49d600-3d94-11eb-83d7-f67cdaf1c800.png)
+
  2. Choose one of the topics as example “ /cmd_vel “ and get the info of this this topic by using the following command:
 ```
 rostopic info /cmd_vel
 ```
+
 And the results will be:
+
 ![4](https://user-images.githubusercontent.com/69988399/102022070-6642b000-3d95-11eb-88a4-5c0da84b7466.png)
+
 As we see (Type:) is showing the message type that we need it to use the topic publishers and subscribers.
 3. The next step is to know the type and the size of Twist message by using the following command:
 ```
 rosmsg show geometry_msgs/twist
 ```
 And the results will be:
+
 ![6](https://user-images.githubusercontent.com/69988399/102022073-6773dd00-3d95-11eb-9cd4-6ce046ea4c3f.png)
+
 As we see, there are linear and angular movement and we will use it to move the robot.
 5.	We will do the same with the topic “/ odom” as we did with the topic “/cmd_vel”  to get the message type and information as the following figure:
 

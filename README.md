@@ -45,10 +45,10 @@ Configuration: The map’s parameters and also the parameters of the sensor used
  6. CMakeLists.txt:
 This unique file contains some C++ fixed processes and building commands. This file is necessary for building a package.
 
- • Nodes: A node is a built-in ROS function (python, C++) that provides/gets information from ROS topics. ROS nodes can subscribe or publish to a topic for the purpose of sharing important information such as metric values etc.
- •	Topics: A topic is the most important component in the package. It can transmit data between nodes (e.g. one node provides values to the topic, and another node prints the topic’s values) and can provide data throughout ROS built-in sensors, functions etc.
- •	Messages: A message is a data structure provided by a ROS node using a specific topic. These values either trigger the specific node or trigger some other nodes that are connected to this topic.
- • Services: A service is an alternative way of transmitting node data. When applying this process, the system gives priority to the service to be executed while pausing the other operations. 
+- Nodes: A node is a built-in ROS function (python, C++) that provides/gets information from ROS topics. ROS nodes can subscribe or publish to a topic for the purpose of sharing important information such as metric values etc.
+-	Topics: A topic is the most important component in the package. It can transmit data between nodes (e.g. one node provides values to the topic, and another node prints the topic’s values) and can provide data throughout ROS built-in sensors, functions etc.
+-	Messages: A message is a data structure provided by a ROS node using a specific topic. These values either trigger the specific node or trigger some other nodes that are connected to this topic.
+- Services: A service is an alternative way of transmitting node data. When applying this process, the system gives priority to the service to be executed while pausing the other operations. 
 
 ![2](https://user-images.githubusercontent.com/69988399/102020969-a00fb880-3d8d-11eb-9624-6dcfb01ecfcb.png)
 
@@ -121,6 +121,90 @@ source devel/setup.bash
 roslaunch project_robotics_1 task_1_move.launch
 ```
 We will see the robot moving according to the values of the msg (linear.x value and
-angular.z value) these values are the linear and angular speed of the mobile robot and the location of the robot is being printed every one second.
+angular.z value) these values is the linear and angular speed of the mobile robot as the following figure.
 
+![WhatsApp Image 2020-12-14 at 1 45 56 AM](https://user-images.githubusercontent.com/69988399/102027981-d57dcb80-3db8-11eb-84d1-26fef8539aee.jpeg)
+
+
+## Task 2
+The aim of this task is to generate the full map of the cafeteria and then localize the Turtlebot3 robot.
+
+In order to approach Task 2 we need to divide the task into sub-processes:
+1.	Map generation
+2.	Robot localization
+### Map generation
+For the map generation, we need a specific sequence of processes. First, we need to use the gmapping package in order to run the slam_gmapping node. This node provides the gmapping SLAM algorithm. SLAM generates a 2D map of the robot’s environment during robot the robot’s movement and its laser data info from the /scan topic. This laser data is transformed into OGM data ( Occumaoncy Grid Map) which represents a map with grayscale values that show the map’s status of each pixel (occupied or free).
+This is established using:
+•	A launch file 
+•	A parameter inside the launch file that starts the service of the slam_gmapping node
+•	A set of parameters that trigger the laser module and thus the /scan topic.
+
+![10](https://user-images.githubusercontent.com/69988399/102027357-86ce3280-3db4-11eb-8714-619416208773.png)
+After executing the gmapping node, we also need to execute an important visualization tool called RVIZ. 
+RVIZ is a visualization tool of the robot that provides a lot of visual elements and makes it easier to understand some processes that need visualization. We execute the following command
+```
+rosrun rviz rviz
+```
+Thus, after opening the new window, some parameters must be added in order to have a representative perspective identical to the figure below
+
+![12](https://user-images.githubusercontent.com/69988399/102027362-87ff5f80-3db4-11eb-87ab-f3d7528f0a3d.png)
+
+*In the RVIZ menu, the LaserScan must have the (/scan) as topic, the frame element must have the /map topic and the map element must have the /map topic.*
+
+When the whole scan process is completed, the next procedure is to save this map and its parameters by the following command
+```
+rosrun map_server map_saver -f map_name
+```
+This command generates the .pgm map and its parameters on a .yaml file.
+
+In the next figure, the .yaml parameters and the .pgm map are generated and the .pgm map depicted.
+
+![13](https://user-images.githubusercontent.com/69988399/102027365-89308c80-3db4-11eb-9bab-4547dd04f66f.png)
+
+
+### Robot localization
+After generating the map, the next procedure is to localize the robot in the generated map. Localization is the process of finding the location of the robot (linear and angular position) inside a map environment. For the purpose of finding these coordinates, we need to use a ROS package called AMCL.
+
+AMCL package provides the Monte Carlo Localization (MCL) algorithm which tracks the localization of a robot moving in a 2D space. In more details, the algorithm generates random poses which are possible guesses of where the robot is. The wrong guesses are discarded, and the correct ones keep on generating. In ROS environment, this process is down by the amcl node.
+
+The amcl node read data from 3 different topics (Subscribe):
+
+ 1. The laser topic (/scan) 
+ 2. The map topic (/map)
+ 3. The transform topic (/tf)
+ 
+ And transfers the data to 3 other topics (Publish):
+ 
+1.	The amcl_pose topic (/amcl_pose)
+2.	The particlecloud topic (/particlecloud)
+3.	The transform topic (/tf)
+
+o	/scan: The amcl node gets the scans of the laser data.
+o	/map: The amcl node get the map info as OGM for localization
+o	/tf: The amcl node uses the relation between of the base_laser and the base_link in order to give the location of the center of the robot.
+o	/amcl_pose: The amcl node publishes the robot’s location into the /amcl pose topic.
+o	/particlecloud: The amcl node publishes the set of estimated arrows for the robot orientations and localization.
+
+Last step is to perform a global localization approach due to the robustness of localization and the invariance of any visual tool. The steps of applying the localization are provided:
+
+1.	Load the map: 
+```
+<arg name="map_file" default="$(find project_robotics_1)/maps/ project_1_map_first.yaml"/>
+<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+```
+2.	Call the service particle_client: 
+```
+<node pkg=" project_robotics_1" type=" particles_script.py" name="service_client" output="screen">
+```
+3.	Run RVIZ as the next figure
+
+![14](https://user-images.githubusercontent.com/69988399/102027347-79b14380-3db4-11eb-9d86-fd076975049e.png)
+
+In the following figure, the global particle cloud localization is eliminating the wrong estimations and transforms the turtlebot3 and its location to the correct position over time until all the particles acquire the same direction and position along with the robot.  
+
+![15](https://user-images.githubusercontent.com/69988399/102027355-86359c00-3db4-11eb-8e68-95542c819e00.png)
+
+
+## Task 3
+## Task 4
 

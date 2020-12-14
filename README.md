@@ -52,9 +52,21 @@ This unique file contains some C++ fixed processes and building commands. This f
 
 ![2](https://user-images.githubusercontent.com/69988399/102020969-a00fb880-3d8d-11eb-9624-6dcfb01ecfcb.png)
 
+## Packages
+
+To implement this project, you have to install these packages before starting (if you aren’t using [The Construct](https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/) Web Platform. )
+[Map_server](http://wiki.ros.org/map_server)
+[Gmapping](http://wiki.ros.org/gmapping)
+[Amcl](http://wiki.ros.org/amcl)
+[Move_base](http://wiki.ros.org/move_base)
+[Launch](http://wiki.ros.org/roslaunch)
+[Turtlebot3_teleop](https://index.ros.org/p/turtlebot3_teleop/)
+[Gazebo_ros_pkgs](http://wiki.ros.org/gazebo_ros_pkgs)
+[Turtlebot3_navigation](http://wiki.ros.org/turtlebot3_navigation)
 
 
 # Tasks Implementation
+
 
 
 Before starting any task, we have to create a package first and put all the tasks inside it and that will be by the following commands:

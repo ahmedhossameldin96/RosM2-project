@@ -207,5 +207,65 @@ In the following figure, the global particle cloud localization is eliminating t
 
 
 ## Task 3
+
+The aim of this task is to set up an automatic system that provides the robot to move from its position to a goal without colliding with any object. 
+
+After generating the map and localizing the robot, the challenge is to move the robot from a position to a goal without colliding with any object. To achieve this, we need to refer to the move_base package. This package and its node (move_base node) aim to move the robot from its current position to a goal position. 
+
+The following figure shows the path planning is initialized step by step. Notify the slight turn of the robot, for the wall avoidance.
+
+![16](https://user-images.githubusercontent.com/69988399/102028329-acf6d100-3dba-11eb-8c72-a88a98bf8697.png)
+
+According to the figure above, the path planning is divided into a compose set of nodes. In order to execute the move_base node, a specific communication among the system components is necessary. The whole move_base node is monitored from a set of specific topics and nodes:
+
+-	The mode_base/goal topic (subscribe): A goal position is provided with execution status.
+-	The move_base_simple/goal topic (subscribe): A goal position is provided without giving any status of the execution.
+-	The /cmd_vel topic (publish): Velocity publication for robot’s transformation.
+-	The move_base/feedback topic: Keeps updating the server for the robot’s information along the path.
+-	The move_base/result topic: Information about the robot when it reaches the goal.
+-	The Global planner parameter: This parameter builds a non-collision plan for the robot to avoid collisions and obstacles during the goal path. This node plans the path from the whole map is invariant to laser information.
+-	The local planner parameter: This parameter builds the path by considering only the sensor data and a small surrounding area of its position at a time in order to plan a path for the goal position.
+-	The local costmap parameter: This parameter is responsible for the map’s obstacle information. The local costmap is used for the local planning.
+-	The global costmap parameter: This parameter is responsible for the map’s obstacle information. The global costmap is used for the global planning.
+
+In order to move from theory to practice, the launch file that monitors the task 3 approach, consist of a set of different parameter files, launch files and python files for creating the path automatically without establishing any 2D nav goal waypoint from RVIZ. The waypoint was calculated by the topic /get_pose.
+
+The launch file specifically consists of:
+1.	Map file, map server.
+2.	Amcl file.
+3.	Base global planner (NavfnROS).
+4.	Base local planner (DWAPlannerROS).
+5.	Move base package.
+6.	Common costmap parameters.
+7.	Global costmap parameters.
+8.	Send goal python file.
+
+The following figure shows the map waypoint is initialized for the robot to reach.
+
+![17](https://user-images.githubusercontent.com/69988399/102028324-a8321d00-3dba-11eb-8a7a-1367ba20f858.png)
+
+Running Task 3 and using the RVIZ window panel to see the robot’s path visualization, we first need to adjust some specific parameters, as shown in the figure below.
+
+![18](https://user-images.githubusercontent.com/69988399/102028325-a9634a00-3dba-11eb-8c86-e6f4f4921d66.png)
+
+After adjusting the RVIZ parameters, we can see the robot’s understandable depicted metrics. The map parameter is added two times because the one represents the local costmap and the other map represents the global costmap parameters. The path parameter is initialized with the DWAPlannerROS planner.
+
+Another important file in this approach is the python file. The python file is responsible for monitoring the map’s waypoint with specific coordinates and orientation. Also, the file triggers the turtlebot3’s planner by calling the action server that triggers with its sequence the move_base action client.
+
+![19](https://user-images.githubusercontent.com/69988399/102028326-abc5a400-3dba-11eb-8185-e5c5a3b6364d.png)
+
+Thus, the result is the robot reaching its destination.
+
+![20](https://user-images.githubusercontent.com/69988399/102028327-ac5e3a80-3dba-11eb-99ba-a5a7f35a9e23.png)
+
 ## Task 4
+The aim of this task is to set up an automatic system that provides the robot to move from its position to a set of waypoints.
+
+The final task corresponds to a set of waypoints instead of one as proposed in Task3. With the same concept as Task3, this challenge can be approached by just increasing the waypoints in the map (see figure below) and the waypoints in the python file. The parameters in RVIZ remain the same. The next figure shows the waypoint initialization is established. The robot must visit these waypoints with the depicted order.
+
+![21](https://user-images.githubusercontent.com/69988399/102028758-cf89e980-3dbc-11eb-9a5f-e3c0d42cbd69.png)
+
+The final image below shows the robot’s ability to maneuver between obstacles without colliding in these three different waypoints.
+
+![22](https://user-images.githubusercontent.com/69988399/102028760-d0bb1680-3dbc-11eb-9d6c-afbc849ca895.png)
 

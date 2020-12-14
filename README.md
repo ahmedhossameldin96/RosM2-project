@@ -290,3 +290,15 @@ The final image below shows the robot’s ability to maneuver between obstacles 
 
 ![22](https://user-images.githubusercontent.com/69988399/102028760-d0bb1680-3dbc-11eb-9d6c-afbc849ca895.png)
 
+# Gant Chart 
+The following chart showing the sequence of our work along the whole semester according to the tasks and the number of weeks.
+
+![1111](https://user-images.githubusercontent.com/69988399/102029374-5d66d400-3dbf-11eb-961e-6b1d50c1062f.JPG)
+
+# Conclusion
+
+ROS and its limitless potential of being the most widely used environment in the robotic field, makes it more interesting to computer vision specialist turn into robotic specialists. In this documentation a light introduction of ROS’s possibilities is provided. Turtlebot3 is selected as the protagonist of this project and its capabilities, connections with a plethora of different packages and nodes in order to monitor specific topics and thus generate information. Due to the fact that is python and C++ based, it gives the opportunity to establish from small projects (like this one) to big and unique ones ( eg. Autonomous surgery with use of deep learning and computer vision). As a team we are very interested in working in more challenging tasks in the near future and thus, establish our limitless ideas on a small yet powerful turtlebot3.
+
+# References
+  - [WIKI ROS](http://wiki.ros.org/)
+  - [The Construct Platform](http://theconstructsim.com)

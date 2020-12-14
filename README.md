@@ -140,6 +140,7 @@ This is established using:
 •	A set of parameters that trigger the laser module and thus the /scan topic.
 
 ![10](https://user-images.githubusercontent.com/69988399/102027357-86ce3280-3db4-11eb-8714-619416208773.png)
+
 After executing the gmapping node, we also need to execute an important visualization tool called RVIZ. 
 RVIZ is a visualization tool of the robot that provides a lot of visual elements and makes it easier to understand some processes that need visualization. We execute the following command
 ```
